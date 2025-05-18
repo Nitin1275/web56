@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Black Screen Prank</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #blackScreen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      z-index: 9999;
+    }
+
+    #downloadBtn {
+      margin-top: 40vh;
+      padding: 20px 40px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="downloadBtn">Download</button>
+  <div id="blackScreen"></div>
+
+  <script>
+    document.getElementById("downloadBtn").addEventListener("click", function () {
+      // Fullscreen request
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+
+      // Vibrate device (if supported)
+      if ("vibrate" in navigator) {
+        navigator.vibrate([500, 200, 500]); // Vibrate 500ms, pause 200ms, vibrate 500ms
+      }
+
+      // Show black screen
+      document.getElementById("blackScreen").style.display = "block";
+
+      // After 14 seconds, remove black screen and exit fullscreen
+      setTimeout(() => {
+        document.getElementById("blackScreen").style.display = "none";
+
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+
+        alert("Screen is back! That was just a prank 😄");
+      }, 14000); // <-- 14 seconds (in milliseconds)
+    });
+  </script>
+
+</body>
+</html>
